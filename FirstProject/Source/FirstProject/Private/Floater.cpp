@@ -6,7 +6,7 @@
 // Sets default values
 AFloater::AFloater()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("MyMesh"));
@@ -20,6 +20,9 @@ AFloater::AFloater()
 
 	bInitializeFloaterLocations = false;
 	bShouldFloat = false;
+
+	InitialForce = FVector(200000.f, 0.f, 0.f);
+	InitialTorque = FVector(200000.f, 0.f, 0.f);
 }
 
 // Called when the game starts or when spawned
@@ -33,6 +36,11 @@ void AFloater::BeginPlay()
 	{
 		SetActorLocation(InitialLocation);
 	}
+
+	
+	
+	StaticMesh->AddForce(InitialForce);
+	StaticMesh->AddTorque(InitialTorque);
 }
 
 // Called every frame
@@ -43,7 +51,9 @@ void AFloater::Tick(float DeltaTime)
 	if (bShouldFloat)
 	{
 		FHitResult HitResult;
-		AddActorLocalOffset(InitialDirection, false, &HitResult);
+		AddActorLocalOffset(InitialDirection, true, &HitResult);
+
+		FVector HitLocation = HitResult.Location;
 	}
 }
 
