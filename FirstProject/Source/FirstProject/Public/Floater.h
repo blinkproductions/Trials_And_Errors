@@ -16,6 +16,9 @@ public:
 	// Sets default values for this actor's properties
 	AFloater();
 
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "ActorMeshComponents")
 	UStaticMeshComponent* StaticMesh;
 
@@ -49,8 +52,12 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+private:
+	float RunningTime;
 
+	UPROPERTY(EditAnywhere, Category = "Floater Variables | Wave Parameters")
+	float Amplitude;
+	
+	UPROPERTY(EditAnywhere, Category = "Floater Variables | Wave Parameters")
+	float Oscillations;
 };
