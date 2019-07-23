@@ -6,7 +6,7 @@
 #include "GameFramework/Pawn.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
-#include "Components/StaticMeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "Critter.generated.h"
 
 UCLASS()
@@ -28,7 +28,7 @@ public:
 	float MaxSpeed;
 
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* MeshComponent;
+	USkeletalMeshComponent* MeshComponent;
 
 	UPROPERTY(EditAnywhere)
 	UCameraComponent* Camera;
