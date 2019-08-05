@@ -26,6 +26,24 @@ public:
 	UFUNCTION()
 	void OnvOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "Floor Switch")
+	void RaiseDoor();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Floor Switch")
+	void LowerDoor();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Floor Switch")
+	void RaiseFloorSwitch();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Floor Switch") // BlueprintImplementable means the function was created in CPP but will be implemented in BP in Unreal
+	void LowerFloorSwitch();
+
+	UFUNCTION(BlueprintCallable, Category = "Floor Switch") // BlueprintCallable means the BP can call it but the function was implemented in CPP
+	void UpdateDoorLocation(float Z);
+
+	UFUNCTION(BlueprintCallable, Category = "Floor Switch")
+	void UpdateFloorSwitchLocation(float Z);
+
 	/** Overlap volume for functionality to be triggered */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Floor Switch")
 	UBoxComponent* TriggerBox;
@@ -36,6 +54,12 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Floor Switch")
 	UStaticMeshComponent* Door;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Floor Switch")
+	FVector InitialDoorLocation;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Floor Switch")
+	FVector InitialSwitchLocation;
 
 protected:
 	// Called when the game starts or when spawned
