@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "TimerManager.h"
 #include "FloorSwitch.generated.h"
 
 UCLASS()
@@ -60,6 +61,15 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = "Floor Switch")
 	FVector InitialSwitchLocation;
+
+	FTimerHandle SwitchHandle;
+
+	void ClosedDoor();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floor Switch")
+	float SwitchTime;
+
+	bool bCharacterOnSwitch;
 
 protected:
 	// Called when the game starts or when spawned
