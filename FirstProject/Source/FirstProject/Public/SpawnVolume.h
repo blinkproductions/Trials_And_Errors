@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "Components/BoxComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Engine/World.h"
+#include "Public/Critter.h"
 #include "SpawnVolume.generated.h"
 
 UCLASS()
@@ -28,6 +30,9 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "Spawning")
 	FVector GetSpawnPoint();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Spawning")
+	void SpawnOurPawn(UClass* ToSpawn, const FVector& Location);
 
 protected:
 	// Called when the game starts or when spawned

@@ -35,3 +35,17 @@ FVector ASpawnVolume::GetSpawnPoint()
 
 	return Point;
 }
+
+void ASpawnVolume::SpawnOurPawn_Implementation(UClass * ToSpawn, const FVector & Location)
+{
+	if (ToSpawn)
+	{
+		UWorld* World = GetWorld();
+		FActorSpawnParameters SpawnParams;
+
+		if (World)
+		{
+			ACritter* CritterSpawned = World->SpawnActor<ACritter>(ToSpawn, Location, FRotator(0.f), SpawnParams);
+		}
+	}
+}
