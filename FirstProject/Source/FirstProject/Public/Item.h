@@ -5,6 +5,11 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/SphereComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "Engine/World.h"
+#include "Sound/SoundCue.h"
 #include "Item.generated.h"
 
 UCLASS()
@@ -26,9 +31,27 @@ public:
 	virtual void OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	/** Base Shape Collision*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item | Collision")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Collision")
 	USphereComponent* CollisionVolume;
 
+	/** Base Mesh Component*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Mesh")
+	UStaticMeshComponent* Mesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Particles")
+	UParticleSystemComponent* IdleParticleComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Particles")
+	UParticleSystem* OverlapParticles;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Sounds")
+	USoundCue* OverlapSound;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|ItemProperties")
+	bool bRotate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|ItemProperties")
+	float RotationRate;
 	
 protected:
 	// Called when the game starts or when spawned
